@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { doLogin } from "./action";
 import Flash from "../components/ClientFlash";
+import { Suspense } from "react";
 
 const Login = () => {
   return (
-    <>
+    <Suspense>
       <div className="min-h-screen pt-10 flex items-center justify-center    bg-gray-100">
         <div className="max-w-xl px-10 w-full border border-gray-300 mx-auto py-10 shadow-lg">
           <h1 className="text-5xl font-bold  tracking-tight mb-10">Login</h1>
@@ -61,8 +62,7 @@ const Login = () => {
           </form>
         </div>
       </div>
-    </>
+    </Suspense>
   );
 };
-
 export default Login;

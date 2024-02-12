@@ -2,6 +2,7 @@ import Link from "next/link";
 import Flash from "../components/ClientFlash";
 import { redirect } from "next/navigation";
 import { BASE_API_URL } from "@/lib/constant";
+import { Suspense } from "react";
 
 // const RegisterPage = () => {};
 
@@ -41,7 +42,7 @@ const Register = () => {
   };
 
   return (
-    <>
+    <Suspense>
       <div className="min-h-full flex items-center justify-center  pt-32 pb-24   bg-gray-100">
         <div className="max-w-2xl px-10 w-full border border-gray-300 mx-auto py-10 shadow-lg">
           <h1 className="text-5xl font-bold  tracking-tight mb-10">Register</h1>
@@ -124,7 +125,7 @@ const Register = () => {
           </form>
         </div>
       </div>
-    </>
+    </Suspense>
   );
 };
 
