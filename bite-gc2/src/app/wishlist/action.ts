@@ -1,5 +1,6 @@
 "use server"
 
+import { BASE_API_URL } from "@/lib/constant";
 // import { createWishlist } from "@/db/models/wishlist";
 
 import { cookies } from "next/headers";
@@ -15,7 +16,7 @@ type WishlistModel = {
 export const action = async (data:string) => {
     console.log(data);
     
-  const response = await fetch(`http://localhost:3000/api/wishlists`,{
+  const response = await fetch(`${BASE_API_URL}/api/wishlists`,{
     method: "POST",
     body: JSON.stringify({
       productId: data,
@@ -27,7 +28,6 @@ export const action = async (data:string) => {
     credentials: "include",
   });
   const datas = await response.json();
-  console.log(datas, "datatbhwbhsjfw");
   
   if (!response.ok) {
     throw new Error("Error server...");

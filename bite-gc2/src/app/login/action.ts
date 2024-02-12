@@ -1,6 +1,7 @@
 "use server";
 import { getUserByEmail } from "@/db/models/user";
 import { comparePassword } from "@/db/utils/hash";
+import { BASE_API_URL } from "@/lib/constant";
 import { signToken } from "@/lib/jwt";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -23,13 +24,13 @@ export const doLogin = async (formData: FormData) => {
     const errPath = parsedData.error.issues[0].path[0];
     const errMsg = parsedData.error.issues[0].message;
     const errFinalMsg = `${errPath}-${errMsg}`;
-    return redirect(`http://localhost:3000/login?error=${errFinalMsg}`);
+    return redirect(`${BASE_API_URL}/login?error=${errFinalMsg}`);
   }
 
   const user = await getUserByEmail(parsedData.data.email);
 
   if (!user || !comparePassword(parsedData.data.password, user.password)) {
-    return redirect(`http://localhost:3000/login?error=Invalid%20credentials`);
+    return redirect(`${BASE_API_URL}/login?error=Invalid%20credentials`);
   }
 
   const payload = {
@@ -51,5 +52,5 @@ export const doLogin = async (formData: FormData) => {
         sameSite: "strict",
   });
 
-  return redirect('http://localhost:3000/wishlist')
+  return redirect(`${BASE_API_URL}/wishlist`)
 };

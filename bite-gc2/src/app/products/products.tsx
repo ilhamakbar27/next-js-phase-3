@@ -30,7 +30,7 @@ const Products = ({
 
   async function loadMore() {
     const next = page + 1;
-    const product = await fetchProducts({ search, page: next });
+    const product = (await fetchProducts({ search, page: next })) as ProductsModel[];
     if (product?.length > 8) {
       await new Promise((resolve) => setTimeout(resolve, 800));
       setPage(next);
@@ -45,6 +45,11 @@ const Products = ({
       loadMore();
     }
   }, [inView]);
+
+
+  // if (!BASE_API_URL) {
+  //   return null;
+  // }
   return (
     <>
       <div className="grid pt-20 gap-3 w-full grid-cols-4">

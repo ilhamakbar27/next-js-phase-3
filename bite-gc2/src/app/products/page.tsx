@@ -1,4 +1,5 @@
 
+import { BASE_API_URL } from "@/lib/constant";
 import Products from "./products";
 import Search from "./search";
 
@@ -28,7 +29,7 @@ const fetchProducts = async ({
     page = 1;
   }
   const response = await fetch(
-    `http://localhost:3000/api/products?search=${search}&page=${page}`
+    `${BASE_API_URL}/api/products?search=${search}&page=${page}`
   );
   const data = await response.json();
   if (!response.ok) {
@@ -49,6 +50,9 @@ const page = async ({
     typeof searchParams.search === "string" ? searchParams.search : undefined;
 
   const products = await fetchProducts({ page, search });
+  if (!BASE_API_URL) {
+    return null;
+  }
   return (
     <>
       <section className="pt-32 px-20 h-full pb-24 ">

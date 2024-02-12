@@ -1,5 +1,8 @@
 "use server"
 
+import { BASE_API_URL } from "@/lib/constant";
+
+
 
 export type ProductsModel = {
     _id: string;
@@ -27,11 +30,14 @@ export type ProductsModel = {
       page = 1;
     }
     const response = await fetch(
-      `http://localhost:3000/api/products?search=${search}&page=${page}`
+      `${BASE_API_URL}/api/products?search=${search}&page=${page}`
     );
     const data = await response.json();
     if (!response.ok) {
       throw new Error("Error server...");
+    }
+    if (!BASE_API_URL) {
+      return null;
     }
     return data.data as ProductsModel[];
   };

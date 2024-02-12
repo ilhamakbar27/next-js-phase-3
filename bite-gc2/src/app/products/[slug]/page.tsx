@@ -1,3 +1,4 @@
+import { BASE_API_URL } from "@/lib/constant";
 import { FaStar } from "react-icons/fa6";
 import { FaCheck } from "react-icons/fa6";
 
@@ -14,7 +15,7 @@ type ProductsModel = {
 };
 
 const fetchProductBySlug = async (slug: string) => {
-  const response = await fetch(`http://localhost:3000/api/products/${slug}`, {
+  const response = await fetch(`${BASE_API_URL}/api/products/${slug}`, {
   });
   const data = await response.json();
   if (!response.ok) {
@@ -27,6 +28,9 @@ const fetchProductBySlug = async (slug: string) => {
 
 const page = async ({ params }: { params: { slug: string } }) => {
   const data = await fetchProductBySlug(params.slug)
+  if (!BASE_API_URL) {
+    return null;
+  }
   return (
     <>
       <section className="h-full bg-[#F9F9F9]">

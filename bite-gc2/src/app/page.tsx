@@ -1,3 +1,4 @@
+import { BASE_API_URL } from "@/lib/constant";
 import { cookies } from "next/headers";
 import Link from "../../node_modules/next/link";
 import Card from "./components/Card";
@@ -16,7 +17,7 @@ type ProductsModel = {
 };
 
 const fetchProducts = async () => {
-  const response = await fetch("http://localhost:3000/api/products", {
+  const response = await fetch(`${BASE_API_URL}/api/products`, {
     headers: {
       Cookie: cookies().toString(),
     },
@@ -39,6 +40,9 @@ const Home = async () => {
     backgroundRepeat: "no-repeat",
     height: "100vh",
   };
+  if (!BASE_API_URL) {
+    return null;
+  }
   return (
     <>
       <section style={backgroundStyle} className="h-screen">

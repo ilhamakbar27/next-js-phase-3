@@ -5,6 +5,7 @@ import ServerProtectedComponents from "@/components/serverProtectedComponents";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { ObjectId } from "mongodb";
+import { BASE_API_URL } from "@/lib/constant";
 
 
 
@@ -32,7 +33,7 @@ type ProductsModel = {
 };
 
 const fetchData = async () => {
-  const response = await fetch("http://localhost:3000/api/wishlists", {
+  const response = await fetch(`${BASE_API_URL}/api/wishlists`, {
     headers: {
       "Content-Type": "application/json",
       Cookie: cookies().toString(),
@@ -45,6 +46,9 @@ const fetchData = async () => {
 
 const page = async () => {
   const wishlists = await fetchData();
+  if (!BASE_API_URL) {
+    return null;
+  }
   return (
     <ServerProtectedComponents>
       <div className="h-full px-20 pb-40 pt-32">
