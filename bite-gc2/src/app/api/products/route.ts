@@ -1,6 +1,7 @@
 import { getProducts } from "@/db/models/products";
 import { ObjectId } from "mongodb";
 import { NextRequest, NextResponse } from "next/server";
+export const dynamic = 'force-dynamic'
 
 type MyResponse<T> = {
   statusCode: number;
@@ -25,7 +26,7 @@ export const GET = async (request: NextRequest) => {
   const search = request.nextUrl.searchParams.get("search");
   const page = request.nextUrl.searchParams.get("page");
 
-  const products = await getProducts(search,Number(page));
+  const products = await getProducts((search as string | undefined),Number(page));
   return NextResponse.json<MyResponse<ProductsModel[]>>(
     {
       statusCode: 200,

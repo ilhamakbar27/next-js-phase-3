@@ -2,6 +2,7 @@
 import { BASE_API_URL } from "@/lib/constant";
 import Products from "./products";
 import Search from "./search";
+export const dynamic = 'force-dynamic'
 
 type ProductsModel = {
   _id: string;
