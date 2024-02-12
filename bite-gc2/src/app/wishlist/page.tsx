@@ -21,7 +21,7 @@ type NewWishlistModel = {
 
 
 type ProductsModel = {
-  _id: ObjectId;
+  _id: string;
   name: string;
   slug: string;
   excerpt: string;
